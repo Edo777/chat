@@ -7,6 +7,7 @@ socket.on('disconnect', () => {
     console.log("disconnected");
 });
 
-socket.on('userMessage', (message) => {
-    console.log(message) 
-})
+socket.on('userMessage', (message, cb) => {
+    console.log(message)
+    cb('this is from server');
+});
