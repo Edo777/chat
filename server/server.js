@@ -12,17 +12,12 @@ var server = http.createServer(app);
 var io = socketIO(server);
 
 io.on('connection', (socket) => {
-    console.log("connected new user");
-    socket.on('disconnect', () => {
-        console.log("disconnected")
-    });
-    socket.emit('message', {
-        text : "hello",
-        from : "Edgar"
-    });
-    socket.on('userresponse', (res) => {
-        console.log(res)
-    });
+   socket.on('createMessage', (message) => {
+       console.log('createMessage', message);
+       io.emit('newMessage', {
+           message
+       });
+   });
 });
 
 app.use(express.static(publicPath));
